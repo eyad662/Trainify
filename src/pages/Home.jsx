@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
-import { useGetinternshipByNameQuery } from "../redux/internship";
+import { useGetInternshipsQuery } from '../redux/internship';
 import Card from "../components/Card";
 import HeroImage from "../assets/hero-home.png";
 
@@ -21,7 +21,7 @@ export default function Home() {
 
 
     const [isOpen, setIsOpen] = useState(false);
-    const { data, error, isLoading } = useGetinternshipByNameQuery("internships?populate=*&pagination[limit]=5");
+const { data, error, isLoading } = useGetInternshipsQuery('All');
 
   const text = "Discover more than";
   const textt = "300+ Internship";
@@ -53,7 +53,6 @@ export default function Home() {
   return(
     <div className="">
     
-    {/*Landing Section*/}
 
     <section className="flex justify-between items-center pt-28 h-[93vh]">
       <div className="mt-8">
@@ -71,7 +70,7 @@ export default function Home() {
       </div>
     </section>
 
-    {/*Companies Section*/}
+    {/*Companies oferring*/}
 
       <section id="latest" className="pb-16 w-full px-4 sm:mt-28">
       <h2 className="text-xl text-gray-600 font-bold mb-12">
@@ -90,6 +89,7 @@ export default function Home() {
       </div>
     </section>
     
+    {/* Latestt */}
     <section>
       <div className="flex justify-between items-end my-16">
         <h1 className="text-4xl font-bold">Latest <span className="text-secondary">Internships</span></h1>
@@ -134,7 +134,6 @@ export default function Home() {
             <p className=" my-2">Need Help!</p>
 
             <form className="flex flex-col gap-4">
-              {/* Email */}
               <input 
                 type="email" 
                 placeholder="Your Email" 
@@ -149,7 +148,6 @@ export default function Home() {
                 required
               ></textarea>
 
-              {/* Submit */}
               <button 
                 type="submit" 
                 className="bg-primary text-white font-semibold py-2 rounded-sm hover:bg-primary-hover cursor-pointer duration-300"
@@ -165,7 +163,7 @@ export default function Home() {
       <hr className="text-bgp" />
 
       <div className="flex justify-between items-start pt-8">
-        <p className="text-gray-300">All rights reserved</p>
+        <p className="text-gray-300">All rights reserved ©️ 2025</p>
         <div></div>
       </div>
 

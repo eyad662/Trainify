@@ -1,5 +1,13 @@
+import { useDispatch } from "react-redux";
+import { addToHistory } from "../redux/applyHistorySlice"; 
+
+
 export default function ApplyModal({ internship, setSelectedInternship }) {
   if (!internship) return null;
+
+  const dispatch = useDispatch();
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
 
   return (
     <div className="fixed inset-0 bg-black/10 backdrop-blur-xs flex justify-center items-center z-50">
@@ -12,14 +20,13 @@ export default function ApplyModal({ internship, setSelectedInternship }) {
           ✕
         </button>
 
-        {/* تفاصيل الـ Internship (شمال) */}
         <div className="w-1/2 border-r pr-6">
           <div className="flex items-center gap-3 mb-4">
-            <img
-              src={`http://localhost:1337${internship.logo.url}`}
-              alt={internship.companyName}
-              className="w-12 h-12 object-contain"
-            />
+          <img
+          src={internship.logo?.url ? internship.logo.url : '/placeholder.png'}
+          alt={internship.companyName || 'Company Logo'}
+          className="w-12 h-12 object-contain"
+          />
             <div>
               <h3 className="text-lg font-semibold">{internship.title}</h3>
               <p className="text-sm text-gray-500">{internship.companyName}</p>
@@ -45,7 +52,6 @@ export default function ApplyModal({ internship, setSelectedInternship }) {
           </div>
         </div>
 
-        {/* الفورم (يمين) */}
         <div className="w-1/2">
           <h2 className="text-xl font-semibold mb-4">Fill this Form to Apply</h2>
           <form className="flex flex-col gap-4">
@@ -53,13 +59,19 @@ export default function ApplyModal({ internship, setSelectedInternship }) {
             <input type="text" placeholder="Address" className="border p-2 rounded-md" />
             <input type="tel" placeholder="Phone Number" className="border p-2 rounded-md" />
             <input type="email" placeholder="Email" className="border p-2 rounded-md" />
-            <p>Upload your CV</p>
+            <p>Upload your CV👇</p>
             <input type="file" placeholder="Upload your CV" className="border p-2 rounded-md" />
 
             <button
               type="submit"
               className="bg-primary cursor-pointer text-white rounded-md px-4 py-2 hover:bg-primary/90"
-              onClick={() => alert("Thanks for applying, We will contact you soon 🤗")}
+              onClick={(e) => {
+                e.preventDefault(); 
+                console.log("Dispatching internship:", internship);
+                dispatch(addToHistory(internship));
+                alert("Thanks for applying, We will contact you soon 🤗")
+                setSelectedInternship(null);
+              }}
             >
               Submit
             </button>

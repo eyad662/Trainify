@@ -1,17 +1,20 @@
-// Need to use the React-specific entry point to import createApi
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// Define a service using a base URL and expected endpoints
 export const internshipApi = createApi({
   reducerPath: 'internshipApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:1337/api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://delightful-broccoli-938a03b463.strapiapp.com/api/' }),
   endpoints: (builder) => ({
-    getinternshipByName: builder.query({
-      query: (name) => `${name}`,
-    }),
+    getInternships: builder.query({
+    query: (filters) => {
+      let queryStr = 'internships?populate=*';
+      if (filters && filters !== 'All') {
+        queryStr += `&filters[field][$eq]=${encodeURIComponent(filters)}`;
+      }
+      return queryStr;
+    }
   }),
-})
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetinternshipByNameQuery } = internshipApi
+  }),
+});
+
+export const { useGetInternshipsQuery } = internshipApi;

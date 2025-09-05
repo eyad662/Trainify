@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* عرّف ألوانك هنا */
 @theme {
   --color-primary: #6155F5;
   --color-primary-hover: #7A6EFF;
@@ -16,6 +15,8 @@
   }
 }
 
-
-/* اختياري: ستايل عام */
 html, body { height: 100%; }
+
+html {
+  scroll-behavior: smooth;
+}

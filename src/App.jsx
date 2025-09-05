@@ -2,17 +2,18 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Internships from "./pages/Internships";
+import ApplyingHistory from "./pages/ApplyingHistory";
 
 function App() {
   return (
     <Router>
-      {/* الناف بار ثابت فوق كل الصفحات */}
+
       <Navbar />
 
-      {/* الصفحات */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/internships" element={<Internships />} />
+        <Route path="/history" element={<ApplyingHistory />} />
       </Routes>
     </Router>
   );
